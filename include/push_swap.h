@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdlib.h>
+# include <stdio.h>
 
 
 typedef struct s_data
@@ -24,5 +25,7 @@ typedef struct s_data
 	int		*stack_b;
 
 }			t_data;
+int	*new_strmapi(char **s, long int (*f)(char *));
+long int	atoi_new(char *str);
 
 #endif

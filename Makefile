@@ -16,7 +16,7 @@ LDFLAGS = -L./libft -lft
 
 NAME = push_swap
 LIBFT	=	./libft/libft.a
-SRCS = main.c
+SRCS = main.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 
