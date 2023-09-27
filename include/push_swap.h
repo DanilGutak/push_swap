@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 19:27:28 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/27 20:37:17 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ typedef struct s_data
 	int		stack_a_count;
 	int		*indexes;
 	int		*stack_b;
+	int		stack_b_count;
 }			t_data;
 int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
 				t_data *data);
 long int	atoi_new(char *str, t_data *data);
 void		free_double_p(char **p);
 void		error(t_data *data, int status);
+void		rrb(t_data *data);
+void		rra(t_data *data);
+void		rrr(t_data *data);
+void		rb(t_data *data);
+void		ra(t_data *data);
+void		rr(t_data *data);
 
 #endif
