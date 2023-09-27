@@ -114,10 +114,10 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 		parse_input(&data, argc, argv);
-	/* printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); */
+	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
 	rra(&data);
-	/* printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); */
+	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
 	ra(&data);
-	/* printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); */
+	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
 
 }

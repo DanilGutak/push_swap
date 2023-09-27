@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux 
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L./libft -lft
 
 NAME = push_swap
