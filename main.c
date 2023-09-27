@@ -6,62 +6,93 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/26 20:55:08 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/27 19:26:36 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error(t_data *data,int status)
+int	checkfile(char **str)
 {
-	if (data->stack_a)
-		free(data->stack_a);
-	if (data->stack_b)
-		free(data->stack_b);
-	if (status == 1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		exit(1);
-	}
-	else if (status == 0)
-		exit(0);
-}
-int checkfile(char **str)
-{
-	int i;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (str[i] != NULL)
 	{
-		while (*str[i] == ' ' || *str[i] == '\v' || *str[i] == '\t' || *str[i] == '\n'
-		|| *str[i] == '\f' || *str[i] == '\r')
-			str[i]++;
-		if (*str[i] == '-' || *str[i] == '+')
-			str[i]++;
-		while (*str[i])
+		j = 0;
+		while (str[i][j] == ' ' || str[i][j] == '\v' || str[i][j] == '\t'
+			|| str[i][j] == '\n' || str[i][j] == '\f' || str[i][j] == '\r')
+			j++;
+		if (str[i][j] == '-' || str[i][j] == '+')
+			j++;
+		if (!str[i][j])
+			return (1);
+		while (str[i][j])
 		{
-			if (!(*str[i] >= '0' && *str[i] <= '9'))
+			if (!(str[i][j] >= '0' && str[i][j] <= '9'))
 				return (1);
-			str[i]++;
+			j++;
 		}
 		i++;
 	}
 	return (0);
 }
-void parse_input(t_data *data, int argc, char **argv)
+
+void	check_duplicate(t_data *data)
 {
-	int 	i;
+	int	i;
+	int	count;
+
+	i = data->stack_a_count;
+	while (--i > 0)
+	{
+		count = i;
+		while (--count >= 0)
+		{
+			if (data->stack_a[count] == data->stack_a[i])
+				error(data, 1);
+		}
+	}
+}
+
+void	is_sorted(t_data *data)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while ((i + 1) < data->stack_a_count)
+	{
+		if (!(data->stack_a[i] < data->stack_a[i + 1]))
+			flag = 1;
+		i++;
+	}
+	if (flag == 0)
+		error(data, 0);
+}
+
+void	check_input(t_data *data)
+{
+	check_duplicate(data);
+	is_sorted(data);
+}
+
+void	parse_input(t_data *data, int argc, char **argv)
+{
+	int		i;
 	char	**str;
 
-	i = 1;
+	i = 0;
 	data->input = 0;
 	data->stack_a = 0;
 	data->stack_b = 0;
-	while (i < argc)
+	data->indexes = 0;
+	while (++i < argc)
 	{
 		data->input = ft_strjoin(data->input, argv[i]);
 		data->input = ft_strjoin(data->input, " ");
-		i++;
 	}
 	if (!data->input)
 		error(data, 1);
@@ -70,20 +101,18 @@ void parse_input(t_data *data, int argc, char **argv)
 		error(data, 1);
 	if (checkfile(str))
 		error(data, 1);
-	data->stack_a = new_strmapi(str, atoi_new);
-	free(str);
-	if(!data->stack_a)
+	data->stack_a = new_strmapi(str, atoi_new, data);
+	free_double_p(str);
+	if (!data->stack_a)
 		error(data, 1);
-	i = -1;
-	while (++i < 6)
-		ft_printf("%d\n", data->stack_a[i]);
-	
+	check_input(data);
 }
+
 int	main(int argc, char **argv)
 {
-	t_data data;
-	
+	t_data	data;
+
 	if (argc > 1)
 		parse_input(&data, argc, argv);
-
+	error(&data, 0);
 }

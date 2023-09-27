@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:59:42 by dgutak            #+#    #+#             */
-/*   Updated: 2023/06/19 18:18:13 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/27 19:03:24 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long int	atoi_new(char *str)
+long int	atoi_new(char *str, t_data *data)
 {
 	long int	x;
 	long int	sign;
@@ -34,30 +34,37 @@ long int	atoi_new(char *str)
 			x = x * 10 + *str - '0';
 		else
 			break ;
+		if ((x > 2147483647 && sign == 1) || (x > 2147483648 && sign == -1))
+			error(data, 1);
 		str++;
 	}
 	return (sign * x);
 }
 
-int	*new_strmapi(char **s, long int (*f)(char *))
+int	*new_strmapi(char **s, long int (*f)(char *, t_data *), t_data *data)
 {
 	unsigned int	count;
-	int			*ret;
+	int				*ret;
 	int				i;
 
 	i = 0;
 	count = 0;
 	while (s[count])
 		count++;
-	ret = malloc(sizeof(char) * (count + 1));
-	if (!ret)
+	data->stack_a_count = count;
+	printf("%d", count);
+	if (data->stack_a_count < 1)
+		error(data, 0);
+	ret = malloc(sizeof(int) * (count));
+	data->indexes = malloc(sizeof(int) * (count));
+	data->stack_b = malloc(sizeof(int) * (count));
+	if (!ret || !data->indexes || !data->stack_b)
 		return (0);
 	while (s[i])
 	{
-		ret[i] = f( s[i]);
+		ret[i] = f(s[i], data);
 		i++;
 	}
-	ret[i] = 0;
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:54:28 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/26 20:36:11 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/27 17:24:48 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_calloc(1, sizeof(char));
 	temp = s1;
-	if (!s2 || !s1)
+	if (!s1)
 		return (NULL);
+	if (!s2)
+		return (s1);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	ret = ft_calloc((len + 1), sizeof(char));
 	if (!ret)

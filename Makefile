@@ -6,7 +6,7 @@
 #    By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 17:55:20 by dgutak            #+#    #+#              #
-#    Updated: 2023/09/26 20:40:14 by dgutak           ###   ########.fr        #
+#    Updated: 2023/09/27 16:51:46 by dgutak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LDFLAGS = -L./libft -lft
 
 NAME = push_swap
 LIBFT	=	./libft/libft.a
-SRCS = main.c utils.c
+SRCS = main.c utils.c error.c
 
 OBJS = $(SRCS:.c=.o)
 
