@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:59:42 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 20:28:50 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/29 17:01:38 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	*new_strmapi(char **s, long int (*f)(char *, t_data *), t_data *data)
 	while (s[count])
 		count++;
 	data->stack_a_count = count;
+	data->stack_b_count = 0;
 	if (data->stack_a_count < 1)
 		error(data, 0);
 	ret = malloc(sizeof(int) * (count));

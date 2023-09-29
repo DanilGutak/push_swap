@@ -6,14 +6,14 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 20:37:17 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/29 17:12:52 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -31,11 +31,17 @@ int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
 long int	atoi_new(char *str, t_data *data);
 void		free_double_p(char **p);
 void		error(t_data *data, int status);
+/* funcs */
 void		rrb(t_data *data);
 void		rra(t_data *data);
 void		rrr(t_data *data);
 void		rb(t_data *data);
 void		ra(t_data *data);
 void		rr(t_data *data);
+void		sb(t_data *data);
+void		sa(t_data *data);
+void		ss(t_data *data);
+void		pa(t_data *data);
+void		pb(t_data *data);
 
 #endif

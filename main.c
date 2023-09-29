@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 20:43:07 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/29 17:21:24 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,20 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 		parse_input(&data, argc, argv);
-	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
-	rra(&data);
-	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
-	ra(&data);
-	printf("%d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3]); 
+	printf("-------\n"); 
+	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
+	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
+	pb(&data);
+	printf("-------\n"); 
+	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
+	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
+	pb(&data);
+	printf("-------\n"); 
+	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
+	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
+	pa(&data);
+	printf("-------\n"); 
+	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
+	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
 
 }
