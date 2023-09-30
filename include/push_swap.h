@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/29 17:12:52 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/30 07:51:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
 long int	atoi_new(char *str, t_data *data);
 void		free_double_p(char **p);
 void		error(t_data *data, int status);
+void 		bubble_sort(t_data *data);
 /* funcs */
 void		rrb(t_data *data);
 void		rra(t_data *data);

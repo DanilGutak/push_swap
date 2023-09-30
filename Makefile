@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+         #
+#    By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 17:55:20 by dgutak            #+#    #+#              #
-#    Updated: 2023/09/29 17:12:36 by dgutak           ###   ########.fr        #
+#    Updated: 2023/09/30 07:50:55 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LDFLAGS = -L./libft -lft
 
 NAME = push_swap
 LIBFT	=	./libft/libft.a
-SRCS = main.c utils.c error.c ./funcs/rrr.c ./funcs/rr.c ./funcs/ss.c ./funcs/p.c 
+SRCS = main.c utils.c error.c sort.c ./funcs/rrr.c ./funcs/rr.c ./funcs/ss.c ./funcs/p.c 
 
 OBJS = $(SRCS:.c=.o)
 

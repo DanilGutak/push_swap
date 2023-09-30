@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/29 17:21:24 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/09/30 08:12:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,11 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 		parse_input(&data, argc, argv);
+	printf("b4 %d %d %d %d %d %d\n",data.indexes[0],data.indexes[1],data.indexes[2],data.indexes[3],data.indexes[4],data.stack_a_count); 
+	bubble_sort(&data);
+	
+	printf("a4 %d %d %d %d %d %d\n",data.indexes[0],data.indexes[1],data.indexes[2],data.indexes[3],data.indexes[4],data.stack_a_count); 
 	printf("-------\n"); 
-	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
 	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
 	pb(&data);
 	printf("-------\n"); 
