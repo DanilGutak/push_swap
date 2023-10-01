@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/30 08:12:57 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/01 20:15:43 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,37 +100,92 @@ void	parse_input(t_data *data, int argc, char **argv)
 	if (!str)
 		error(data, 1);
 	if (checkfile(str))
-		error(data, 1);
+		(free_double_p(str), error(data, 1));
 	data->stack_a = new_strmapi(str, atoi_new, data);
 	free_double_p(str);
 	if (!data->stack_a)
 		error(data, 1);
 	check_input(data);
 }
+void	run_n(t_data * data, int n, void (*f)(t_data *))
+{
+	while (n--)
+		f(data);
+}
 
+void check_chunk(t_data *data, int start, int end, int j)
+{
+	int	middle;
+	int	i;
+
+	middle = (end - start) / 2;
+	while (++j < data->stack_a_count)
+	{
+		i = start - 1;
+		while (++i < end)
+		{
+			if (data->stack_a[j] == data->indexes[i])
+			{
+				if (data->stack_a_count - j > j)
+					run_n(data, j, ra);
+				else
+					run_n(data, data->stack_a_count - j, rra);
+				pb(data);
+				if (i > middle + start)
+					rb(data);
+				j = -1;
+				break ;
+			}
+		}
+	}
+}
+void push_b(t_data *data, int start, int end, int i)
+{
+	int j;
+	
+	while (++i < data->chunk_size)
+	{
+		/* printf("\n stack b b4 {");
+		for (int k = 0; k < data->stack_b_count; k++)
+			printf("%d ",data->stack_b[k]);
+		printf("\n } end is %d start is %d \n", end, start); */
+		check_chunk(data, start, end, -1);
+		/* printf("\n stack b after \n");
+		for (int k = 0; k < data->stack_b_count; k++)
+			printf("%d ",data->stack_b[k]); */
+		j = start - 1;
+		while (++j < end - 1 - (end - start) / 2)
+			rrb(data);
+		start += data->chunk_size;
+		end += data->chunk_size;
+		if (i + 2 == data->chunk_size)
+			end += data->chunk_last_size;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
 	if (argc > 1)
 		parse_input(&data, argc, argv);
-	printf("b4 %d %d %d %d %d %d\n",data.indexes[0],data.indexes[1],data.indexes[2],data.indexes[3],data.indexes[4],data.stack_a_count); 
-	bubble_sort(&data);
+	sort_for_index(&data);
+	/* printf(" indexes ");
+	for (int i = 0; i < data.stack_a_count; i++)
+		printf("%d ",data.indexes[i]);
+	printf("\n stack a after sort "); */
+	/* for (int i = 0; i < data.stack_a_count; i++)
+		printf("%d ",data.stack_a[i]); */
+	push_b(&data, 0, data.chunk_size, -1);
+	/* printf("\n ");
 	
-	printf("a4 %d %d %d %d %d %d\n",data.indexes[0],data.indexes[1],data.indexes[2],data.indexes[3],data.indexes[4],data.stack_a_count); 
-	printf("-------\n"); 
-	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
-	pb(&data);
-	printf("-------\n"); 
-	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
-	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
-	pb(&data);
-	printf("-------\n"); 
-	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
-	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
-	pa(&data);
-	printf("-------\n"); 
-	printf("a %d %d %d %d %d %d\n",data.stack_a[0],data.stack_a[1],data.stack_a[2],data.stack_a[3],data.stack_a[4],data.stack_a_count); 
-	printf("b %d %d %d %d %d %d\n",data.stack_b[0],data.stack_b[1],data.stack_b[2],data.stack_b[3],data.stack_b[4],data.stack_b_count); 
+	printf("\n stack b ");
+	for (int i = 0; i < data.stack_b_count; i++)
+		printf("%d ",data.stack_b[i]);
+		
+	printf("\n stack a ");
+	for (int i = 0; i < data.stack_a_count; i++)
+		printf("%d ",data.stack_a[i]); */
+
+	error(&data, 0);
 
 }

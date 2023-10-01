@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 20:34:13 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 20:45:15 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/01 15:57:34 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ra(t_data *data)
 		i++;
 	}
 	data->stack_a[i] = temp;
+	printf("ra\n");
 }
 
 void	rb(t_data *data)
@@ -40,6 +41,7 @@ void	rb(t_data *data)
 		i++;
 	}
 	data->stack_b[i] = temp;
+	printf("rb\n");
 }
 
 void	rr(t_data *data)

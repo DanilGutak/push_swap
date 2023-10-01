@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/30 07:51:21 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/01 14:06:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ typedef struct s_data
 	int		*indexes;
 	int		*stack_b;
 	int		stack_b_count;
+	int		chunk_size;
+	int		chunk_last_size;
+	int		read_chunk;
 }			t_data;
 int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
 				t_data *data);
 long int	atoi_new(char *str, t_data *data);
 void		free_double_p(char **p);
 void		error(t_data *data, int status);
-void 		bubble_sort(t_data *data);
+void		sort_for_index(t_data *data);
 /* funcs */
 void		rrb(t_data *data);
 void		rra(t_data *data);

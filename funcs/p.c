@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <dgutak@student.42vienna.com>    +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:02:15 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/30 07:43:03 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/01 15:23:24 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pa(t_data *data)
 {
 	int	i;
 
-	i = data->stack_a_count - 1;
+	i = data->stack_a_count;
 	if (data->stack_a_count == 1)
 		data->stack_a[1] = data->stack_a[0];
 	else
@@ -36,13 +36,14 @@ void	pa(t_data *data)
 		i++;
 	}
 	data->stack_b_count--;
+	ft_putstr_fd("pa\n", 1);
 }
 
 void	pb(t_data *data)
 {
-	int i;
+	int	i;
 
-	i = data->stack_b_count - 1;
+	i = data->stack_b_count;
 	if (data->stack_b_count == 1)
 		data->stack_b[1] = data->stack_b[0];
 	else
@@ -62,4 +63,5 @@ void	pb(t_data *data)
 		i++;
 	}
 	data->stack_a_count--;
+	printf("pb\n");
 }
