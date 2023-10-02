@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/01 20:15:43 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 18:42:30 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ void	parse_input(t_data *data, int argc, char **argv)
 		error(data, 1);
 	check_input(data);
 }
-void	run_n(t_data * data, int n, void (*f)(t_data *))
+void	run_n(t_data *data, int n, void (*f)(t_data *))
 {
 	while (n--)
 		f(data);
 }
 
-void check_chunk(t_data *data, int start, int end, int j)
+void	check_chunk(t_data *data, int start, int end, int j)
 {
 	int	middle;
 	int	i;
@@ -139,20 +139,13 @@ void check_chunk(t_data *data, int start, int end, int j)
 		}
 	}
 }
-void push_b(t_data *data, int start, int end, int i)
+void	push_b(t_data *data, int start, int end, int i)
 {
-	int j;
-	
+	int	j;
+
 	while (++i < data->chunk_size)
 	{
-		/* printf("\n stack b b4 {");
-		for (int k = 0; k < data->stack_b_count; k++)
-			printf("%d ",data->stack_b[k]);
-		printf("\n } end is %d start is %d \n", end, start); */
 		check_chunk(data, start, end, -1);
-		/* printf("\n stack b after \n");
-		for (int k = 0; k < data->stack_b_count; k++)
-			printf("%d ",data->stack_b[k]); */
 		j = start - 1;
 		while (++j < end - 1 - (end - start) / 2)
 			rrb(data);
@@ -162,30 +155,90 @@ void push_b(t_data *data, int start, int end, int i)
 			end += data->chunk_last_size;
 	}
 }
+int check_for_insert(t_data *data)
+{
+	int	k;
+
+	k = data->stack_b_count + data->stack_a_count;
+	while (--k)
+	{
+		if (data->stack_b[0] == data->indexes[k])
+			return (1);
+		if (data->stack_a[data->stack_a_count - 1] == data->indexes[k])
+			return (0);
+	}
+	return (0);
+}
+
+
+void	run_b_a(t_data *data, int n, int flag, int *j)
+{
+	while (n--)
+	{
+		if (data->end == 0 || check_for_insert(data))
+		{
+			pa(data);
+			ra(data);
+			data->end++;
+			*j = -1;
+			return ;
+		}
+		else
+		{
+			if (flag == 2)
+				rrb(data);
+			else
+				rb(data);
+		}
+	}
+	pa(data);
+	*j = -1;
+}
+
+void	check_b_stack(t_data *data, int i)
+{
+	int	j;
+
+	j = -1;
+	while (++j < data->stack_b_count)
+	{
+		if (data->stack_b[j] == data->indexes[i])
+		{
+			if (data->stack_b_count - j >= j)
+				run_b_a(data, j, 1, &j);
+			else
+				run_b_a(data, data->stack_b_count - j, 2, &j);
+		}
+	}
+}
+void	push_a(t_data *data, int i)
+{
+	data->end = 0;
+	while (--i > -1)
+	{
+		if (data->stack_b[0] == data->indexes[i])
+		{
+			pa(data);
+		}
+		else
+		{
+			check_b_stack(data, i);
+			if (data->stack_a[data->stack_a_count - 1] == data->indexes[i])
+			{
+				rra(data);
+			}
+		}
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
 	if (argc > 1)
 		parse_input(&data, argc, argv);
+	data.cmd[0] = 0;
 	sort_for_index(&data);
-	/* printf(" indexes ");
-	for (int i = 0; i < data.stack_a_count; i++)
-		printf("%d ",data.indexes[i]);
-	printf("\n stack a after sort "); */
-	/* for (int i = 0; i < data.stack_a_count; i++)
-		printf("%d ",data.stack_a[i]); */
 	push_b(&data, 0, data.chunk_size, -1);
-	/* printf("\n ");
-	
-	printf("\n stack b ");
-	for (int i = 0; i < data.stack_b_count; i++)
-		printf("%d ",data.stack_b[i]);
-		
-	printf("\n stack a ");
-	for (int i = 0; i < data.stack_a_count; i++)
-		printf("%d ",data.stack_a[i]); */
-
+	push_a(&data, data.stack_b_count);
 	error(&data, 0);
-
 }

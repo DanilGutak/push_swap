@@ -6,7 +6,7 @@
 #    By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 16:02:58 by dgutak            #+#    #+#              #
-#    Updated: 2023/09/14 10:50:19 by dgutak           ###   ########.fr        #
+#    Updated: 2023/10/02 18:46:07 by dgutak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS			=ft_isalpha.c ft_strlcat.c \
 				ft_putendl_fd.c ft_putnbr_fd.c \
 				 ft_putnbru_fd.c ft_printhex.c ft_strstr.c\
 				 ft_strjoin.c ft_bzero.c ft_strlen.c ft_calloc.c\
-				 ft_strnstr.c ft_strtrim.c
+				 ft_strnstr.c ft_strtrim.c ft_strlcpy.c
 				
 OBJS			= $(SRCS:.c=.o)
 

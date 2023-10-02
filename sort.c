@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 07:39:22 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/01 15:22:09 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 13:10:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	sort_for_index(t_data *data)
 			break ;
 		i++;
 	}
-	data->chunk_size = i;
+	data->chunk_size = i ;
 	data->chunk_last_size = data->stack_a_count - i * i;
 }

@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:02:15 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/01 15:23:24 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 18:55:58 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	pa(t_data *data)
 		i++;
 	}
 	data->stack_b_count--;
-	ft_putstr_fd("pa\n", 1);
+	action(data, "pa");
 }
 
 void	pb(t_data *data)
@@ -63,5 +63,32 @@ void	pb(t_data *data)
 		i++;
 	}
 	data->stack_a_count--;
-	printf("pb\n");
+	action(data, "pb");
+}
+
+void	action(t_data *data, char *cmd)
+{
+	if (ft_strncmp(cmd, "end", 4) == 0)
+	{
+		if (data->cmd[0] == 0)
+			ft_printf("%s\n", cmd);
+	}
+	else if (data->cmd[0] == 0)
+		ft_strlcpy(data->cmd, cmd, 4);
+	else if ((ft_strncmp(cmd, "rra", 4) == 0 && ft_strncmp(data->cmd, "rrb",
+				4) == 0) || (ft_strncmp(cmd, "rrb", 4) == 0
+			&& ft_strncmp(data->cmd, "rra", 4) == 0))
+	{
+		ft_printf("rrr\n");
+		data->cmd[0] = 0;
+	}
+	else if ((ft_strncmp(cmd, "ra", 4) == 0 && ft_strncmp(data->cmd, "rb",
+				4) == 0) || (ft_strncmp(cmd, "rb", 4) == 0
+			&& ft_strncmp(data->cmd, "ra", 4) == 0))
+	{
+		ft_printf("rr\n");
+		data->cmd[0] = 0;
+	}
+	else
+		(ft_printf("%s\n", data->cmd), ft_strlcpy(data->cmd, cmd, 4));
 }

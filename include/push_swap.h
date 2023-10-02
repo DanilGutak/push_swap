@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/01 14:06:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 18:42:55 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_data
 	int		chunk_size;
 	int		chunk_last_size;
 	int		read_chunk;
+	int		end;
+	char	cmd[4];
 }			t_data;
 int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
 				t_data *data);
@@ -36,6 +38,7 @@ void		free_double_p(char **p);
 void		error(t_data *data, int status);
 void		sort_for_index(t_data *data);
 /* funcs */
+void		action(t_data *data, char *cmd);
 void		rrb(t_data *data);
 void		rra(t_data *data);
 void		rrr(t_data *data);
