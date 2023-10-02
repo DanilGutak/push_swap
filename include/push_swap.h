@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/02 18:42:55 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 20:57:54 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 	int		*stack_b;
 	int		stack_b_count;
 	int		chunk_size;
+	int		chunk_num;
 	int		chunk_last_size;
 	int		read_chunk;
 	int		end;

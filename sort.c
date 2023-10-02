@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 07:39:22 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/02 13:10:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 21:41:46 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ void	sort_for_index(t_data *data)
 	while (++i < data->stack_a_count)
 		data->stack_a[i] = i;
 	i = 1;
-	while (i * i != data->stack_a_count)
-	{
-		if ((i + 1) * (i + 1) > data->stack_a_count)
-			break ;
+	while (i * i < data->stack_a_count)
 		i++;
-	}
-	data->chunk_size = i ;
-	data->chunk_last_size = data->stack_a_count - i * i;
+	i = i / 2;
+	data->chunk_num = i;
+	data->chunk_size = data->stack_a_count / data->chunk_num;
+	data->chunk_last_size = data->stack_a_count - data->chunk_size
+		* data->chunk_num;
 }

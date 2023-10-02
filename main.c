@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/02 18:42:30 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/02 21:39:11 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	push_b(t_data *data, int start, int end, int i)
 {
 	int	j;
 
-	while (++i < data->chunk_size)
+	while (++i < data->chunk_num)
 	{
 		check_chunk(data, start, end, -1);
 		j = start - 1;
@@ -151,7 +151,7 @@ void	push_b(t_data *data, int start, int end, int i)
 			rrb(data);
 		start += data->chunk_size;
 		end += data->chunk_size;
-		if (i + 2 == data->chunk_size)
+		if (i + 2 == data->chunk_num)
 			end += data->chunk_last_size;
 	}
 }
@@ -159,7 +159,7 @@ int check_for_insert(t_data *data)
 {
 	int	k;
 
-	k = data->stack_b_count + data->stack_a_count;
+	k = data->stack_b_count + data->end;
 	while (--k)
 	{
 		if (data->stack_b[0] == data->indexes[k])
@@ -169,7 +169,6 @@ int check_for_insert(t_data *data)
 	}
 	return (0);
 }
-
 
 void	run_b_a(t_data *data, int n, int flag, int *j)
 {
@@ -181,7 +180,6 @@ void	run_b_a(t_data *data, int n, int flag, int *j)
 			ra(data);
 			data->end++;
 			*j = -1;
-			return ;
 		}
 		else
 		{
@@ -191,7 +189,8 @@ void	run_b_a(t_data *data, int n, int flag, int *j)
 				rb(data);
 		}
 	}
-	pa(data);
+	if (*j != -1)
+		pa(data);
 	*j = -1;
 }
 
