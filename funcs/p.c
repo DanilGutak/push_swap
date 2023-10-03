@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:02:15 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/02 18:55:58 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/03 10:14:00 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	action(t_data *data, char *cmd)
 {
 	if (ft_strncmp(cmd, "end", 4) == 0)
 	{
-		if (data->cmd[0] == 0)
-			ft_printf("%s\n", cmd);
+		if (data->cmd[0] != 0)
+			ft_printf("%s\n", data->cmd);
 	}
 	else if (data->cmd[0] == 0)
 		ft_strlcpy(data->cmd, cmd, 4);

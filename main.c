@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 12:03:27 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/02 21:39:11 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/03 10:16:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void	push_b(t_data *data, int start, int end, int i)
 			end += data->chunk_last_size;
 	}
 }
-int check_for_insert(t_data *data)
+int	check_for_insert(t_data *data)
 {
 	int	k;
 
@@ -174,23 +174,21 @@ void	run_b_a(t_data *data, int n, int flag, int *j)
 {
 	while (n--)
 	{
-		if (data->end == 0 || check_for_insert(data))
+		if (flag == 1)
 		{
-			pa(data);
-			ra(data);
-			data->end++;
-			*j = -1;
-		}
-		else
-		{
-			if (flag == 2)
-				rrb(data);
+			if (data->end == 0 || check_for_insert(data))
+			{
+				pa(data);
+				ra(data);
+				data->end++;
+			}
 			else
 				rb(data);
 		}
+		else
+			rrb(data);
 	}
-	if (*j != -1)
-		pa(data);
+	pa(data);
 	*j = -1;
 }
 
@@ -239,5 +237,6 @@ int	main(int argc, char **argv)
 	sort_for_index(&data);
 	push_b(&data, 0, data.chunk_size, -1);
 	push_a(&data, data.stack_b_count);
+	action(&data, "end");
 	error(&data, 0);
 }
