@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:12:47 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/27 17:59:19 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/03 13:57:29 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error(t_data *data, int status)
 		free(data->stack_b);
 	if (data->input)
 		free(data->input);
-	if (data->indexes)
+	if (data->indexes != 0)
 		free(data->indexes);
 	if (status == 1)
 	{

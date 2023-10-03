@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/02 20:57:54 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/03 13:58:41 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ typedef struct s_data
 	int		end;
 	char	cmd[4];
 }			t_data;
-int			*new_strmapi(char **s, long int (*f)(char *, t_data *),
-				t_data *data);
-long int	atoi_new(char *str, t_data *data);
+int			*new_strmapi(char **s, long int (*f)(char *), t_data *data, int i);
+long int	atoi_new(char *str);
 void		free_double_p(char **p);
 void		error(t_data *data, int status);
 void		sort_for_index(t_data *data);
+void		sort_small(t_data *data);
+void		push_a(t_data *data, int i);
+void		push_b(t_data *data, int start, int end, int i);
+void		is_sorted(t_data *data);
+void		check_duplicate(t_data *data);
+void		run_n(t_data *data, int n, void (*f)(t_data *));
 /* funcs */
 void		action(t_data *data, char *cmd);
 void		rrb(t_data *data);

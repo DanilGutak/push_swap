@@ -6,13 +6,13 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 18:59:42 by dgutak            #+#    #+#             */
-/*   Updated: 2023/09/29 17:01:38 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:47:21 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long int	atoi_new(char *str, t_data *data)
+long int	atoi_new(char *str)
 {
 	long int	x;
 	long int	sign;
@@ -35,61 +35,71 @@ long int	atoi_new(char *str, t_data *data)
 		else
 			break ;
 		if ((x > 2147483647 && sign == 1) || (x > 2147483648 && sign == -1))
-			error(data, 1);
+			return (9876543210);
 		str++;
 	}
 	return (sign * x);
 }
 
-int	*new_strmapi(char **s, long int (*f)(char *, t_data *), t_data *data)
+int	*new_strmapi(char **s, long int (*f)(char *), t_data *data, int i)
 {
 	unsigned int	count;
 	int				*ret;
-	int				i;
+	long int		temp;
 
-	i = 0;
 	count = 0;
 	while (s[count])
 		count++;
 	data->stack_a_count = count;
-	data->stack_b_count = 0;
 	if (data->stack_a_count < 1)
-		error(data, 0);
-	ret = malloc(sizeof(int) * (count));
-	data->indexes = malloc(sizeof(int) * (count));
-	data->stack_b = malloc(sizeof(int) * (count));
-	if (!ret || !data->indexes || !data->stack_b)
+		(free_double_p(s), error(data, 0));
+	ret = malloc(sizeof(int) * (count + 1));
+	if (!ret)
 		return (0);
-	while (s[i])
+	data->indexes = malloc(sizeof(int) * (count + 1));
+	data->stack_b = malloc(sizeof(int) * (count + 1));
+	if (!data->indexes || !data->stack_b)
+		(free(ret), free_double_p(s), error(data, 1));
+	while (s[++i])
 	{
-		ret[i] = f(s[i], data);
-		i++;
+		temp = f(s[i]);
+		if (temp == 9876543210)
+			(free(ret), free_double_p(s), error(data, 1));
+		ret[i] = (int)temp;
 	}
 	return (ret);
 }
 
-/*
-#include <stdio.h>
-
-int	main(void)
+void	check_duplicate(t_data *data)
 {
-	char str1[] = "   12345";
-	char str2[] = "   -6789";
-	char str3[] = "   +42";
-	char str4[] = "   ------++123";
-	char str5[] = "   +--123";
-	char str6[] = "15";
-	char str7[] = "";
-	char str8[] = "1234asd5";
+	int	i;
+	int	count;
 
-	printf("%d\n", ft_atoi(str1)); // should output 12345
-	printf("%d\n", ft_atoi(str2)); // should output -6789
-	printf("%d\n", ft_atoi(str3)); // should output 42
-	printf("%d\n", ft_atoi(str4)); // should output 0
-	printf("%d\n", ft_atoi(str5)); // should output -123
-	printf("%d\n", ft_atoi(str6)); // should output 0
-	printf("%d\n", ft_atoi(str7)); // should output 0
-	printf("%d\n", ft_atoi(str8)); // should output 0
+	i = data->stack_a_count;
+	while (--i > 0)
+	{
+		count = i;
+		while (--count >= 0)
+		{
+			if (data->stack_a[count] == data->stack_a[i])
+				error(data, 1);
+		}
+	}
+}
 
-	return (0);
-} */
+void	is_sorted(t_data *data)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while ((i + 1) < data->stack_a_count)
+	{
+		if (!(data->stack_a[i] < data->stack_a[i + 1]))
+			flag = 1;
+		i++;
+	}
+	if (flag == 0)
+		error(data, 0);
+}
