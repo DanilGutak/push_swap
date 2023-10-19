@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:12:47 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/03 13:57:29 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/19 11:56:35 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	error(t_data *data, int status)
 {
 	if (data->stack_a)
 		free(data->stack_a);
+	if (data->gnl_buffer)
+		free(data->gnl_buffer);
 	if (data->stack_b)
 		free(data->stack_b);
 	if (data->input)

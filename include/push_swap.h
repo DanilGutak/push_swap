@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:58:53 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/03 13:58:41 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/19 10:55:02 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,9 @@
 # include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+#include "get_next_line.h"
 
-typedef struct s_data
-{
-	char	*input;
-	int		*stack_a;
-	int		stack_a_count;
-	int		*indexes;
-	int		*stack_b;
-	int		stack_b_count;
-	int		chunk_size;
-	int		chunk_num;
-	int		chunk_last_size;
-	int		read_chunk;
-	int		end;
-	char	cmd[4];
-}			t_data;
+
 int			*new_strmapi(char **s, long int (*f)(char *), t_data *data, int i);
 long int	atoi_new(char *str);
 void		free_double_p(char **p);

@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:02:15 by dgutak            #+#    #+#             */
-/*   Updated: 2023/10/03 10:14:00 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/10/19 12:01:04 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@ void	pa(t_data *data)
 {
 	int	i;
 
-	i = data->stack_a_count;
+	if (data->stack_b_count == 0)
+		return;
+	i = data->stack_a_count + 1;
 	if (data->stack_a_count == 1)
 		data->stack_a[1] = data->stack_a[0];
 	else
-	{
-		while (i > 0)
-		{
+		while (--i > 0)
 			data->stack_a[i] = data->stack_a[i - 1];
-			i--;
-		}
-	}
 	data->stack_a[0] = data->stack_b[0];
 	data->stack_a_count++;
 	i = 0;
@@ -36,24 +33,22 @@ void	pa(t_data *data)
 		i++;
 	}
 	data->stack_b_count--;
-	action(data, "pa");
+	if (data->flag == 0)
+		action(data, "pa");
 }
 
 void	pb(t_data *data)
 {
 	int	i;
 
-	i = data->stack_b_count;
+	if (data->stack_a_count == 0)
+		return;
+	i = data->stack_b_count +1;
 	if (data->stack_b_count == 1)
 		data->stack_b[1] = data->stack_b[0];
 	else
-	{
-		while (i > 0)
-		{
+		while (--i > 0)
 			data->stack_b[i] = data->stack_b[i - 1];
-			i--;
-		}
-	}
 	data->stack_b[0] = data->stack_a[0];
 	data->stack_b_count++;
 	i = 0;
@@ -63,9 +58,9 @@ void	pb(t_data *data)
 		i++;
 	}
 	data->stack_a_count--;
-	action(data, "pb");
+	if (data->flag == 0)
+		action(data, "pb");
 }
-
 void	action(t_data *data, char *cmd)
 {
 	if (ft_strncmp(cmd, "end", 4) == 0)
